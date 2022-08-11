@@ -13,6 +13,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: | 
           export body=$(curl "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&hourly=temperature_2m,relativehumidity_2m,windspeed_10m")
-          export time=$(echo $body | jq '.time[0]')
-            export weather=$(echo $body | jq '.temperature_2m[0]')
+          export time=$(echo $body | jq '.hourly.time[0]')
+            export weather=$(echo $body | jq '.temperature_2m')
           gh pr comment $PR_NAMBER --body "The weather $weather  the time is $time" --repo $GITHUB_REPOSITORY
